@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PoliCommon.WebApiClient
+namespace EIA.Services.Clients
 {
     public static class UrlExtensions
     {

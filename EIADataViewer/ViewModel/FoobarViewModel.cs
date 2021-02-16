@@ -1,6 +1,7 @@
-﻿using EIADataViewer.Services;
+﻿using System.Threading.Tasks;
+using EIA.Domain.Model;
+using EIA.Services.Clients;
 using PoliCommon.MVVM;
-using System.Threading.Tasks;
 
 namespace EIADataViewer.ViewModel
 {
@@ -26,6 +27,7 @@ namespace EIADataViewer.ViewModel
 
         public async Task LoadAsync()
         {
+            Category category = await _client.GetCategoryByIdAsync("371");
             await _client.GetSeriesByIdAsync("ELEC.GEN.WND-IA-1.M");
             Something = "Something ELSE";
         }

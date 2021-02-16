@@ -1,23 +1,15 @@
-﻿using EIADataViewer.Services;
-using EIADataViewer.ViewModel;
+﻿using System;
+using System.IO;
+using System.Net.Http;
+using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PoliCommon.Security;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Windows;
+using EIA.Services.Clients;
+using EIADataViewer.ViewModel;
 
 namespace EIADataViewer
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private IServiceProvider _provider;

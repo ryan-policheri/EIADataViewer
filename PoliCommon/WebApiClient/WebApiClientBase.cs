@@ -23,27 +23,26 @@ namespace PoliCommon.WebApiClient
             Client = httpClient;
         }
 
-        protected Uri BaseUri
-        {
-            get
-            {
-                return Client.BaseAddress;
-            }
-        }
-
         public async Task<T> GetAsync<T>(string uri)
         {
-            var result = await InternalGetAsync<T>(uri);
+            var result = await InternalGetAsync<T>(uri, null);
             return result;
         }
 
-        private async Task<T> InternalGetAsync<T>(string uri)
+        public async Task<T> GetAsync<T>(string uri, string nestedPropertyToStartFrom)
         {
+            var result = await InternalGetAsync<T>(uri, nestedPropertyToStartFrom);
+            return result;
+        }
+
+        private async Task<T> InternalGetAsync<T>(string uri, string nestedPropertyToStartFrom)
+        {
+            if (String.IsNullOrWhiteSpace(nestedPropertyToStartFrom)) nestedPropertyToStartFrom = NestedPropertyToStartFrom;
             try
             {
                 using HttpResponseMessage response = await Client.GetAsync(PrepareUri(uri));
                 string responseString = await response.AsStringAsync();
-                return await response.AsAsync<T>(SerializerOptions, NestedPropertyToStartFrom);
+                return await response.AsAsync<T>(SerializerOptions, nestedPropertyToStartFrom);
             }
             catch (Exception ex)
             {
