@@ -7,7 +7,6 @@ namespace EIADataViewer.ViewModel
         public MainViewModel(FoobarViewModel foobarViewModel)
         {
             FoobarViewModel = foobarViewModel;
-            FoobarViewModel.Something = "FOOOOOBAAARRRRR!!!!!!!!";
         }
 
         public FoobarViewModel FoobarViewModel { get; }

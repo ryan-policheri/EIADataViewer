@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIADataViewer", "EIADataVie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoliCommon", "PoliCommon\PoliCommon.csproj", "{D312E9B0-5172-40FC-B719-68271557642F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIA.Domain", "EIA.Domain\EIA.Domain.csproj", "{BC8C41DE-81B0-4F30-A1E6-C9D1C75339BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIA.Domain", "EIA.Domain\EIA.Domain.csproj", "{BC8C41DE-81B0-4F30-A1E6-C9D1C75339BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIA.Services", "EIA.Services\EIA.Services.csproj", "{C4CA0F19-8994-4CFC-B10F-CB5FDDFCCF4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIA.Services", "EIA.Services\EIA.Services.csproj", "{C4CA0F19-8994-4CFC-B10F-CB5FDDFCCF4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

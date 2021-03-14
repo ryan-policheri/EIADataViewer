@@ -23,6 +23,6 @@ namespace EIA.Domain.Model
         public string Notes { get; set; }
 
         [JsonPropertyName("childcategories")]
-        public IEnumerable<Category> ChildCategories { get; set; }
+        public ICollection<Category> ChildCategories { get; set; }
     }
 }
