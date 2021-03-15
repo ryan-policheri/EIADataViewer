@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoliCommon.MVVM
 {
@@ -20,7 +17,7 @@ namespace PoliCommon.MVVM
             _model = model;
             Children = new ObservableCollection<LazyTreeItemViewModel>();
             if(addPlaceholder) Children.Add(new LazyTreeItemViewModel(new LazyTreeItemPlaceHolder(), false));
-            ChildrenLoaded = false;
+            ChildrenLoaded = model.IsKnownLeaf();
         }
 
         public string Id => _model.GetId();
@@ -37,22 +34,27 @@ namespace PoliCommon.MVVM
             if (children == null) return;
             foreach(ILazyTreeItemBackingModel child in children)
             {
-                Children.Add(new LazyTreeItemViewModel(child));
+                Children.Add(new LazyTreeItemViewModel(child, !child.IsKnownLeaf()));
             }
             ChildrenLoaded = true;
         }
-    }
 
-    public class LazyTreeItemPlaceHolder : ILazyTreeItemBackingModel
-    {
-        public string GetItemName()
+        private class LazyTreeItemPlaceHolder : ILazyTreeItemBackingModel
         {
-            return "Loading...";
-        }
+            public string GetId()
+            {
+                throw new NotImplementedException();
+            }
 
-        public string GetId()
-        {
-            throw new NotImplementedException();
+            public string GetItemName()
+            {
+                return "Loading...";
+            }
+
+            public bool IsKnownLeaf()
+            {
+                return true;
+            }
         }
     }
 }

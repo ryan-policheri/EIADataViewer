@@ -6,5 +6,6 @@ namespace PoliCommon.MVVM
     {
         string GetId();
         string GetItemName();
+        bool IsKnownLeaf();
     }
 }

@@ -24,5 +24,8 @@ namespace EIA.Domain.Model
 
         [JsonPropertyName("childcategories")]
         public ICollection<Category> ChildCategories { get; set; }
+
+        [JsonPropertyName("childseries")]
+        public ICollection<Series> ChildSeries { get; set; }
     }
 }
