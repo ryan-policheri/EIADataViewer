@@ -1,11 +1,12 @@
-﻿using EIADataViewer.ViewModel;
-using PoliCommon.MVVM;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using MvvmCross.Platforms.Wpf.Views;
+using PoliCommon.MVVM;
+using EIADataViewer.Core.ViewModels;
 
-namespace EIADataViewer.View
+namespace EIADataViewer.Wpf.Views
 {
-    public partial class DatasetFinderView : UserControl
+    public partial class DatasetFinderView : MvxWpfView
     {
         private DatasetFinderViewModel _viewModel => this.DataContext as DatasetFinderViewModel;
 
@@ -16,10 +17,10 @@ namespace EIADataViewer.View
 
         private async void LazyLoadedTree_Expanded(object sender, RoutedEventArgs args)
         {
-            if(sender != null && args != null && args.OriginalSource != null && args.OriginalSource is TreeViewItem)
+            if (sender != null && args != null && args.OriginalSource != null && args.OriginalSource is TreeViewItem)
             {
                 TreeViewItem treeItem = args.OriginalSource as TreeViewItem;
-                if(treeItem != null)
+                if (treeItem != null)
                 {
                     LazyTreeItemViewModel treeItemViewModel = treeItem.DataContext as LazyTreeItemViewModel;
                     if (treeItemViewModel != null)

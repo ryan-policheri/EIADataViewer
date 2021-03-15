@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIA.Domain", "EIA.Domain\EI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIA.Services", "EIA.Services\EIA.Services.csproj", "{C4CA0F19-8994-4CFC-B10F-CB5FDDFCCF4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIADataViewer.Core", "EIADataViewer.Core\EIADataViewer.Core.csproj", "{474093CE-F5C7-4420-9FA1-D1FD4E02A125}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIADataViewer.Wpf", "EIADataViewer.Wpf\EIADataViewer.Wpf.csproj", "{F6F0D593-7C57-4A53-9459-C9B1264DFD02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{C4CA0F19-8994-4CFC-B10F-CB5FDDFCCF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4CA0F19-8994-4CFC-B10F-CB5FDDFCCF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4CA0F19-8994-4CFC-B10F-CB5FDDFCCF4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{474093CE-F5C7-4420-9FA1-D1FD4E02A125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{474093CE-F5C7-4420-9FA1-D1FD4E02A125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{474093CE-F5C7-4420-9FA1-D1FD4E02A125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{474093CE-F5C7-4420-9FA1-D1FD4E02A125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6F0D593-7C57-4A53-9459-C9B1264DFD02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F0D593-7C57-4A53-9459-C9B1264DFD02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F0D593-7C57-4A53-9459-C9B1264DFD02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F0D593-7C57-4A53-9459-C9B1264DFD02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
