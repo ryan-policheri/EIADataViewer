@@ -4,16 +4,16 @@ namespace EIADataViewer.ViewModel
 {
     public class MainViewModel
     {
-        public MainViewModel(FoobarViewModel foobarViewModel)
+        public MainViewModel(DatasetFinderViewModel foobarViewModel)
         {
-            FoobarViewModel = foobarViewModel;
+            DatasetFinderViewModel = foobarViewModel;
         }
 
-        public FoobarViewModel FoobarViewModel { get; }
+        public DatasetFinderViewModel DatasetFinderViewModel { get; }
 
         public async Task LoadAsync()
         {
-            await FoobarViewModel.LoadAsync();
+            await DatasetFinderViewModel.LoadAsync();
         }
     }
 }

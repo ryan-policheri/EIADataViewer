@@ -10,11 +10,11 @@ using PoliCommon.MVVM;
 
 namespace EIADataViewer.ViewModel
 {
-    public class FoobarViewModel : ViewModelBase
+    public class DatasetFinderViewModel : ViewModelBase
     {
         private EiaClient _client;
 
-        public FoobarViewModel(EiaClient client)
+        public DatasetFinderViewModel(EiaClient client)
         {
             _client = client;
             _categories = new ObservableCollection<LazyTreeItemViewModel>();
@@ -42,14 +42,15 @@ namespace EIADataViewer.ViewModel
 
         public async Task LoadChildrenAsync(LazyTreeItemViewModel treeItem)
         {
+            if (treeItem.ChildrenLoaded) return; //Children are already loaded. Do nothing
             Category itemToLoad = await _client.GetCategoryByIdAsync(int.Parse(treeItem.Id));
             if (itemToLoad.ChildCategories == null || itemToLoad.ChildCategories.Count == 0) treeItem.AppendLoadedChildren(null); //Pass in null to mark as a leaf
             else
             {
-                ICollection<LazyTreeItemViewModel> loadedChildren = new List<LazyTreeItemViewModel>();
+                ICollection<ILazyTreeItemBackingModel> loadedChildren = new List<ILazyTreeItemBackingModel>();
                 foreach(Category children in itemToLoad.ChildCategories)
                 {
-                    loadedChildren.Add(new LazyTreeItemViewModel(new CategoryWrapper(children)));
+                    loadedChildren.Add(new CategoryWrapper(children));
                 }
                 treeItem.AppendLoadedChildren(loadedChildren);
             }

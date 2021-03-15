@@ -53,7 +53,7 @@ namespace EIADataViewer
             services.AddTransient<EiaClient>(x => new EiaClient(x.GetRequiredService<IHttpClientFactory>().CreateClient("EiaClient")));
 
             services.AddTransient<MainViewModel>();
-            services.AddTransient<FoobarViewModel>();
+            services.AddTransient<DatasetFinderViewModel>();
 
             return services.BuildServiceProvider();
         }

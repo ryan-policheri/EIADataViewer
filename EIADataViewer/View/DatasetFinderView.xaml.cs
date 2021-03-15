@@ -20,11 +20,11 @@ namespace EIADataViewer.View
     /// <summary>
     /// Interaction logic for FoobarView.xaml
     /// </summary>
-    public partial class FoobarView : UserControl
+    public partial class DatasetFinderView : UserControl
     {
-        private FoobarViewModel _viewModel => this.DataContext as FoobarViewModel;
+        private DatasetFinderViewModel _viewModel => this.DataContext as DatasetFinderViewModel;
 
-        public FoobarView()
+        public DatasetFinderView()
         {
             InitializeComponent();
         }

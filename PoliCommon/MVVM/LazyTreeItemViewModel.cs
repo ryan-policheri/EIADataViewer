@@ -20,6 +20,7 @@ namespace PoliCommon.MVVM
             _model = model;
             Children = new ObservableCollection<LazyTreeItemViewModel>();
             if(addPlaceholder) Children.Add(new LazyTreeItemViewModel(new LazyTreeItemPlaceHolder(), false));
+            ChildrenLoaded = false;
         }
 
         public string Id => _model.GetId();
@@ -28,14 +29,17 @@ namespace PoliCommon.MVVM
 
         public ObservableCollection<LazyTreeItemViewModel> Children { get; }
 
-        public void AppendLoadedChildren(IEnumerable<LazyTreeItemViewModel> children)
+        public bool ChildrenLoaded { get; private set; }
+
+        public void AppendLoadedChildren(IEnumerable<ILazyTreeItemBackingModel> children)
         {
             Children.Clear();
             if (children == null) return;
-            foreach(LazyTreeItemViewModel child in children)
+            foreach(ILazyTreeItemBackingModel child in children)
             {
-                Children.Add(child);
+                Children.Add(new LazyTreeItemViewModel(child));
             }
+            ChildrenLoaded = true;
         }
     }
 
