@@ -16,7 +16,7 @@ namespace PoliCommon.MVVM
         {
             _model = model;
             Children = new ObservableCollection<LazyTreeItemViewModel>();
-            if(addPlaceholder) Children.Add(new LazyTreeItemViewModel(new LazyTreeItemPlaceHolder(), false));
+            if (addPlaceholder) Children.Add(new LazyTreeItemViewModel(new LazyTreeItemPlaceHolder(), false));
             ChildrenLoaded = model.IsKnownLeaf();
         }
 
@@ -32,11 +32,16 @@ namespace PoliCommon.MVVM
         {
             Children.Clear();
             if (children == null) return;
-            foreach(ILazyTreeItemBackingModel child in children)
+            foreach (ILazyTreeItemBackingModel child in children)
             {
                 Children.Add(new LazyTreeItemViewModel(child, !child.IsKnownLeaf()));
             }
             ChildrenLoaded = true;
+        }
+
+        public ILazyTreeItemBackingModel GetBackingModel()
+        {
+            return _model;
         }
 
         private class LazyTreeItemPlaceHolder : ILazyTreeItemBackingModel
@@ -54,6 +59,11 @@ namespace PoliCommon.MVVM
             public bool IsKnownLeaf()
             {
                 return true;
+            }
+
+            public string GetMetadata()
+            {
+                throw new NotImplementedException();
             }
         }
     }

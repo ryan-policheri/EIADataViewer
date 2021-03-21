@@ -1,21 +1,25 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using PoliCommon.EventAggregation;
+using PoliCommon.MVVM;
 using EIA.Domain.Constants;
 using EIA.Domain.Model;
 using EIA.Services.Clients;
+using EIADataViewer.Events;
 using EIADataViewer.ModelWrappers;
-using PoliCommon.MVVM;
 
 namespace EIADataViewer.ViewModel
 {
     public class DatasetFinderViewModel : ViewModelBase
     {
-        private EiaClient _client;
+        private readonly EiaClient _client;
+        private readonly IMessageHub _messageHub;
 
-        public DatasetFinderViewModel(EiaClient client)
+        public DatasetFinderViewModel(EiaClient client, IMessageHub messageHub)
         {
             _client = client;
             _categories = new ObservableCollection<LazyTreeItemViewModel>();
+            _messageHub = messageHub;
         }
 
         private ObservableCollection<LazyTreeItemViewModel> _categories;
@@ -38,6 +42,14 @@ namespace EIADataViewer.ViewModel
 
         public async Task LoadChildrenAsync(LazyTreeItemViewModel treeItem)
         {
+            ILazyTreeItemBackingModel modelInterface = treeItem.GetBackingModel();
+            CategorySeriesWrapper model = modelInterface as CategorySeriesWrapper;
+            if(model.IsSeries())
+            {
+                _messageHub.Publish<ViewModelTransitionEvent>(new ViewModelTransitionEvent { SenderType = nameof(DatasetFinderViewModel), Id = model.GetId() });
+                return;
+            }
+
             if (treeItem.ChildrenLoaded) return; //Children are already loaded. Do nothing
             Category itemToLoad = await _client.GetCategoryByIdAsync(int.Parse(treeItem.Id));
             CategorySeriesWrapper wrappedItem = new CategorySeriesWrapper(itemToLoad);

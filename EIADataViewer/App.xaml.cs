@@ -9,6 +9,7 @@ using PoliCommon.Security;
 using EIA.Services.Clients;
 using EIADataViewer.Common;
 using EIADataViewer.ViewModel;
+using PoliCommon.EventAggregation;
 
 namespace EIADataViewer
 {
@@ -58,8 +59,11 @@ namespace EIADataViewer
 
             services.AddTransient<EiaClient>(x => new EiaClient(x.GetRequiredService<IHttpClientFactory>().CreateClient("EiaClient")));
 
+            services.AddSingleton<IMessageHub, MessageHub>();
+
             services.AddTransient<MainViewModel>();
             services.AddTransient<DatasetFinderViewModel>();
+            services.AddTransient<SeriesViewModel>();
 
             return services.BuildServiceProvider();
         }

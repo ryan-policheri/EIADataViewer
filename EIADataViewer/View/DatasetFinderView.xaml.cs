@@ -1,7 +1,7 @@
-﻿using EIADataViewer.ViewModel;
-using PoliCommon.MVVM;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using PoliCommon.MVVM;
+using EIADataViewer.ViewModel;
 
 namespace EIADataViewer.View
 {

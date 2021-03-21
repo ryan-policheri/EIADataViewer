@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -23,6 +24,12 @@ namespace PoliCommon.WebApiClient
             Client = httpClient;
         }
 
+        public async Task<string> GetAsync(string uri)
+        {
+            var result = await InternalGetAsync(uri);
+            return result;
+        }
+
         public async Task<T> GetAsync<T>(string uri)
         {
             var result = await InternalGetAsync<T>(uri, null);
@@ -35,30 +42,15 @@ namespace PoliCommon.WebApiClient
             return result;
         }
 
-        private async Task<T> InternalGetAsync<T>(string uri, string nestedPropertyToStartFrom)
+        public async Task<T> GetFirstAsync<T>(string uri)
         {
-            if (String.IsNullOrWhiteSpace(nestedPropertyToStartFrom)) nestedPropertyToStartFrom = NestedPropertyToStartFrom;
-            try
-            {
-                using HttpResponseMessage response = await Client.GetAsync(PrepareUri(uri));
-                string responseString = await response.AsStringAsync();
-                return await response.AsAsync<T>(SerializerOptions, nestedPropertyToStartFrom);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public async Task<string> GetAsync(string uri)
-        {
-            var result = await InternalGetAsync(uri);
+            var result = await InternalGetFirstAsync<T>(uri, null);
             return result;
         }
 
-        public async Task<T> GetFirstAsync<T>(string uri)
+        public async Task<T> GetFirstAsync<T>(string uri, string nestedPropertyToStartFrom)
         {
-            var result = await InternalGetFirstAsync<T>(uri);
+            var result = await InternalGetFirstAsync<T>(uri, nestedPropertyToStartFrom);
             return result;
         }
 
@@ -145,7 +137,7 @@ namespace PoliCommon.WebApiClient
             await InternalDeleteAsync(uri);
         }
 
-        protected async Task<byte[]> GetRawAsync(String uri)
+        public async Task<byte[]> GetRawAsync(String uri)
         {
             using HttpResponseMessage response = await Client.GetAsync(PrepareUri(uri));
             return await response.AsBytesAsync();
@@ -170,14 +162,30 @@ namespace PoliCommon.WebApiClient
             }
         }
 
-        private async Task<T> InternalGetFirstAsync<T>(string uri)
+        private async Task<T> InternalGetAsync<T>(string uri, string nestedPropertyToStartFrom)
         {
+            if (String.IsNullOrWhiteSpace(nestedPropertyToStartFrom)) nestedPropertyToStartFrom = NestedPropertyToStartFrom;
+            try
+            {
+                using HttpResponseMessage response = await Client.GetAsync(PrepareUri(uri));
+                string responseString = await response.AsStringAsync();
+                return await response.AsAsync<T>(SerializerOptions, nestedPropertyToStartFrom);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private async Task<T> InternalGetFirstAsync<T>(string uri, string nestedPropertyToStartFrom)
+        {
+            if (String.IsNullOrWhiteSpace(nestedPropertyToStartFrom)) nestedPropertyToStartFrom = NestedPropertyToStartFrom;
             try
             {
                 string jsonResult = string.Empty;
                 using HttpResponseMessage response = await Client.GetAsync(PrepareUri(uri));
-
-                return await response.AsAsync<T>(SerializerOptions);
+                var result = await response.AsAsync<IEnumerable<T>>(SerializerOptions, nestedPropertyToStartFrom);
+                return result.FirstOrDefault();
             }
             catch (Exception ex)
             {

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PoliCommon.MVVM;
 using EIA.Domain.Model;
-using System;
 
 namespace EIADataViewer.ModelWrappers
 {
@@ -16,7 +16,7 @@ namespace EIADataViewer.ModelWrappers
             _series = null;
             this.Children = new List<CategorySeriesWrapper>();
 
-            if(_category.ChildCategories != null)
+            if (_category.ChildCategories != null)
             {
                 foreach (Category child in _category.ChildCategories)
                 {
@@ -24,13 +24,13 @@ namespace EIADataViewer.ModelWrappers
                 }
             }
 
-            if(_category.ChildSeries != null)
+            if (_category.ChildSeries != null)
             {
-                foreach(Series child in _category.ChildSeries)
+                foreach (Series child in _category.ChildSeries)
                 {
                     Children.Add(new CategorySeriesWrapper(child));
                 }
-            }    
+            }
         }
 
         private CategorySeriesWrapper(Series series)
@@ -60,6 +60,11 @@ namespace EIADataViewer.ModelWrappers
         {//A category could have a child category so we don't know if it is a leaf. A series will always be a leaf.
             if (_category == null && _series != null) return true;
             else return false;
+        }
+
+        public bool IsSeries()
+        {
+            return _series != null;
         }
     }
 }

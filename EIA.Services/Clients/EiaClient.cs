@@ -51,10 +51,10 @@ namespace EIA.Services.Clients
             return await this.GetAsync<Category>(path, "category");
         }
 
-        public async Task GetSeriesByIdAsync(string seriesId)
+        public async Task<Series> GetSeriesByIdAsync(string seriesId)
         {
             string path = "series/".WithQueryString("api_key", _subscriptionKey).WithQueryString("series_id", seriesId);
-            HttpResponseMessage message = await Client.GetAsync(path);
+            return await this.GetFirstAsync<Series>(path, "series");
         }
     }
 }
