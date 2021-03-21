@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using System.Reflection;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PoliCommon.Security;
 using EIA.Services.Clients;
+using EIADataViewer.Common;
 using EIADataViewer.ViewModel;
 
 namespace EIADataViewer
@@ -19,6 +21,10 @@ namespace EIADataViewer
         {
             LoadConfiguration();
             _provider = BuildServiceProvider();
+
+            Assembly executingAssembly = Assembly.GetExecutingAssembly();
+            DataTemplateRegistrar templateRegistrar = new DataTemplateRegistrar(executingAssembly, "EIADataViewer.ViewModel", "EIADataViewer.View");
+            templateRegistrar.RegisterAllTemplatesByConvention();
 
             MainViewModel viewModel = _provider.GetRequiredService<MainViewModel>();
             MainWindow window = new MainWindow();
