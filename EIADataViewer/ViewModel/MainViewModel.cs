@@ -44,6 +44,10 @@ namespace EIADataViewer.ViewModel
                 CurrentChild = _seriesViewModel;
                 await _seriesViewModel.LoadAsync(args.Id);
             }    
+            else if (args.SenderType == nameof(SeriesViewModel))
+            {
+                CurrentChild = _datasetFinderViewModel;
+            }
         }
     }
 }
