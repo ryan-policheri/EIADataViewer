@@ -6,10 +6,109 @@
              xmlns:local="clr-namespace:EIADataViewer.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <FontFamily x:Key="DataFont">Arial</FontFamily>
+
+            <!--<Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeader}">
+                <Setter Property="Padding" Value="1 2 2 2"/>
+                <Setter Property="Margin" Value="0 0 0 0"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="0 0 1 2"/>
+                <Setter Property="Background" Value="#E8E6E6"/>
+            </Style>
+
+            <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DataGridCell}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                            <Border Name="DataGridCellBorder" SnapsToDevicePixels="True">
+                                <ContentControl Content="{TemplateBinding Content}">
+                                    <ContentControl.ContentTemplate>
+                                        <DataTemplate>
+                                            <TextBox Background="Transparent" TextWrapping="WrapWithOverflow" IsReadOnly="True" BorderThickness="0"
+                                                     Height="Auto" Width="Auto" Padding="3 0 2 0" Text="{Binding Text}" SnapsToDevicePixels="True"/>
+                                        </DataTemplate>
+                                    </ContentControl.ContentTemplate>
+                                </ContentControl>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0">
             <TextBlock Text="{Binding SeriesName}" FontSize="18" Margin="10" FontWeight="Bold"/>
             <Button Content="Close Series" Command="{Binding CloseSeriesCommand}" Width="250" Height="50"/>
         </StackPanel>
+
+        <!--<DataGrid Grid.Row="1" Name="MainDataGrid" BorderThickness="1" BorderBrush="Gray" AutoGenerateColumns="True"
+                    CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="true" CanUserResizeColumns="True"
+                    SelectionMode="Single" SelectionUnit="FullRow" MaxColumnWidth="900" Height="Auto" Width="Auto"
+                    Background="WhiteSmoke" VerticalScrollBarVisibility="Auto" GridLinesVisibility="All"
+                    HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" SnapsToDevicePixels="True" 
+                    VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.VirtualizationMode="Standard" VirtualizingPanel.IsVirtualizing="True"
+                    VirtualizingPanel.IsVirtualizingWhenGrouping="True" EnableRowVirtualization="True"
+                    ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                    CellStyle="{StaticResource DataGridCellStyle}">
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Margin" Value="0 0 0 0"/>
+                            <Setter Property="Padding" Value="0 0 0 0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Border BorderThickness="0 0 0 2" BorderBrush="Gray">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="2 5 0 5">
+                                                    <TextBlock FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.HeaderFontSize}"
+                                                            FontWeight="Bold" Text="Group:  " Margin="0"/>
+                                                    <TextBlock FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.HeaderFontSize}"
+                                                            FontWeight="Bold" Text="{Binding Path=Name}" Margin="0"/>
+                                                    <TextBlock FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.HeaderFontSize}"
+                                                            FontWeight="Bold" Text="Count:  " Margin="15 0 0 0" Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ReportNeedsTotalRowFooter, Converter={StaticResource BoolToVisibility}}"/>
+                                                    <TextBlock FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.HeaderFontSize}"
+                                                            FontWeight="Bold" Text="{Binding Path=ItemCount}" Margin="0" Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ReportNeedsTotalRowFooter, Converter={StaticResource BoolToVisibility}}"/>
+                                                </StackPanel>
+                                                <ItemsPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                                <StackPanel Name="GroupFooterHost" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Loaded="GroupFooterHost_Loaded" Tag="{Binding Path=Name}">
+                                                    --><!--Tag element holds the group value in a convenient location-->
+                                                    <!--This stack panel gets filled programmatically in the GroupFooter_Loaded handler!--><!--
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+        </DataGrid>
+        <ScrollViewer Grid.Row="3" Name="MainFooterScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
+            <Border x:Name="MainFooterBorder" BorderThickness="1 0 1 1" BorderBrush="Gray" Background="WhiteSmoke">
+                <StackPanel Name="MainFooterHost">
+                    --><!--This stack panel gets filled programmatically in the OnReportDataChanged handler!--><!--
+                </StackPanel>
+            </Border>
+        </ScrollViewer>-->
     </Grid>
 </UserControl>

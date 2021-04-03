@@ -6,6 +6,7 @@ using PoliCommon.MVVM;
 using EIA.Domain.Model;
 using EIA.Services.Clients;
 using EIADataViewer.Events;
+using System.Data;
 
 namespace EIADataViewer.ViewModel
 {
@@ -33,12 +34,25 @@ namespace EIADataViewer.ViewModel
             }
         }
 
+        private DataTable _dataSet;
+        public DataTable DataSet 
+        {
+            get { return _dataSet; }
+            private set
+            {
+                _dataSet = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand CloseSeriesCommand { get; }
 
         public async Task LoadAsync(string seriesId)
         {
             Series series = await _client.GetSeriesByIdAsync(seriesId);
             SeriesName = series.Name;
+            ConstructedDataSet dataSet = series.ToConstructedDataSet();
+            DataSet = dataSet.Table;
         }
 
         private void OnCloseSeries()

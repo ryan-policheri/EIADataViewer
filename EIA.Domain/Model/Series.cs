@@ -12,8 +12,11 @@ namespace EIA.Domain.Model
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
         [JsonPropertyName("f")]
-        public string  Frequency { get; set; }
+        public string Frequency { get; set; }
 
         [JsonPropertyName("units")]
         public string Units { get; set; }
@@ -24,5 +27,10 @@ namespace EIA.Domain.Model
         [JsonPropertyName("data")]
         [JsonConverter(typeof(ToSeriesDataPointsConverter))]
         public ICollection<SeriesData> Data { get; set; }
+
+        public ConstructedDataSet ToConstructedDataSet()
+        {
+            return new ConstructedDataSet(this);
+        }
     }
 }
