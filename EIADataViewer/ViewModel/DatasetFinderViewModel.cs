@@ -44,7 +44,7 @@ namespace EIADataViewer.ViewModel
         {
             ILazyTreeItemBackingModel modelInterface = treeItem.GetBackingModel();
             CategorySeriesWrapper model = modelInterface as CategorySeriesWrapper;
-            if(model.IsSeries())
+            if(model != null && model.IsSeries())
             {
                 _messageHub.Publish<ViewModelTransitionEvent>(new ViewModelTransitionEvent { SenderType = nameof(DatasetFinderViewModel), Id = model.GetId() });
                 return;

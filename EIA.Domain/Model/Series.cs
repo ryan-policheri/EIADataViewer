@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using EIA.Domain.DataBind;
 
 namespace EIA.Domain.Model
 {
@@ -21,5 +20,9 @@ namespace EIA.Domain.Model
 
         [JsonPropertyName("updated")]
         public string Updated { get; set; }
+
+        [JsonPropertyName("data")]
+        [JsonConverter(typeof(ToSeriesDataPointsConverter))]
+        public ICollection<SeriesData> Data { get; set; }
     }
 }
