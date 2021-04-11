@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace PoliCommon.MVVM
+namespace DotNetCommon.MVVM
 {
     public class LazyTreeItemViewModel : ViewModelBase
     {

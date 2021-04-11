@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PoliCommon.MVVM
+namespace DotNetCommon.MVVM
 {
     public interface ILazyTreeItemBackingModel
     {

@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EIADataViewer.Core\EIADataViewer.Core.csproj" />
-    <ProjectReference Include="..\PoliCommon\PoliCommon.csproj" />
+    <ProjectReference Include="..\DotNetCommon\DotNetCommon.csproj" />
   </ItemGroup>
 
 </Project>

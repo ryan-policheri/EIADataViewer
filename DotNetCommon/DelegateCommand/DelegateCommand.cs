@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace PoliCommon.DelegateCommand
+namespace DotNetCommon.DelegateCommand
 {//Source: https://github.com/PrismLibrary/Prism
     /// <summary>
     /// An <see cref="ICommand"/> whose delegates do not take any parameters for <see cref="Execute()"/> and <see cref="CanExecute()"/>.

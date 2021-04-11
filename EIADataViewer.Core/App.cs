@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.ViewModels;
-using PoliCommon.Security;
+using DotNetCommon.Security;
 using EIA.Services.Clients;
 using EIADataViewer.Core.ViewModels;
 

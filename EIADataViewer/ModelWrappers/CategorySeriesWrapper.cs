@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using PoliCommon.MVVM;
+using DotNetCommon.MVVM;
 using EIA.Domain.Model;
 
 namespace EIADataViewer.ModelWrappers

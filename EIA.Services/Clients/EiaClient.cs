@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using EIA.Domain.Model;
-using PoliCommon.Extensions;
-using PoliCommon.WebApiClient;
+using DotNetCommon.Extensions;
+using DotNetCommon.WebApiClient;
 
 namespace EIA.Services.Clients
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PoliCommon.EventAggregation
+namespace DotNetCommon.EventAggregation
 {
     public interface IMessageHub : IDisposable
     {//Source: https://github.com/NimaAra/Easy.MessageHub

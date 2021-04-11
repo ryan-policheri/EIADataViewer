@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using PoliCommon.EventAggregation;
-using PoliCommon.MVVM;
+using DotNetCommon.EventAggregation;
+using DotNetCommon.MVVM;
 using EIADataViewer.Events;
 
 namespace EIADataViewer.ViewModel

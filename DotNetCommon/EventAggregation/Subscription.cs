@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace PoliCommon.EventAggregation
+namespace DotNetCommon.EventAggregation
 {
     internal sealed class Subscription
     {//Source: https://github.com/NimaAra/Easy.MessageHub

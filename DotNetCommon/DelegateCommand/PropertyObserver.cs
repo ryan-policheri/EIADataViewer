@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace PoliCommon.DelegateCommand
+namespace DotNetCommon.DelegateCommand
 {//Source: https://github.com/PrismLibrary/Prism
     internal class PropertyObserver
     {//Source: https://github.com/PrismLibrary/Prism

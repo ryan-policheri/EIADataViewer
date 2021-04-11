@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace PoliCommon.Extensions
+namespace DotNetCommon.Extensions
 {
     public static class ObjectExtensions
     {

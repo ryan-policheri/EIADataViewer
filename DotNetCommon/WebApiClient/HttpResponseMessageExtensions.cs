@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace PoliCommon.WebApiClient
+namespace DotNetCommon.WebApiClient
 {
     public static class HttpResponseMessageExtensions
     {

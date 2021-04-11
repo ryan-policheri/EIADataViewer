@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PoliCommon.Extensions
+namespace DotNetCommon.Extensions
 {
     public static class ArrayExtensions
     {

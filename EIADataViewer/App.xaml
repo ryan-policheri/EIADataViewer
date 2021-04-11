@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:EIADataViewer"
              Startup="Application_Startup">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+            
+            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" x:Key="DataGridColumnHeaderStyle"/>
+            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}" x:Key="DataGridCellStyle"/>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using PoliCommon.EventAggregation;
-using PoliCommon.MVVM;
+using DotNetCommon.EventAggregation;
+using DotNetCommon.MVVM;
 using EIA.Domain.Constants;
 using EIA.Domain.Model;
 using EIA.Services.Clients;

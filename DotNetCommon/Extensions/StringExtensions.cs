@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace PoliCommon.Extensions
+namespace DotNetCommon.Extensions
 {
     public static class StringExtensions
     {

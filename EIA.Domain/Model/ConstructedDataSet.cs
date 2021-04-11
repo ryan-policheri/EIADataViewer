@@ -1,5 +1,5 @@
 ﻿using EIA.Domain.Enums;
-using PoliCommon.Extensions;
+using DotNetCommon.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;

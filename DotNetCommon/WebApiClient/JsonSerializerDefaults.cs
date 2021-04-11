@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace PoliCommon.WebApiClient
+namespace DotNetCommon.WebApiClient
 {
     public static class JsonSerializerDefaults
     {

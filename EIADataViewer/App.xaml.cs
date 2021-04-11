@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PoliCommon.Security;
+using DotNetCommon.Security;
 using EIA.Services.Clients;
 using EIADataViewer.Common;
 using EIADataViewer.ViewModel;
-using PoliCommon.EventAggregation;
+using DotNetCommon.EventAggregation;
 
 namespace EIADataViewer
 {

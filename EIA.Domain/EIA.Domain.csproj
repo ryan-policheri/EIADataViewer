@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PoliCommon\PoliCommon.csproj" />
+    <ProjectReference Include="..\DotNetCommon\DotNetCommon.csproj" />
   </ItemGroup>
 
 </Project>

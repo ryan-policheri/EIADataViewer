@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Windows.Input;
 
-namespace PoliCommon.DelegateCommand
+namespace DotNetCommon.DelegateCommand
 {//Source: https://github.com/PrismLibrary/Prism
     public abstract class DelegateCommandBase : ICommand
     {//Source: https://github.com/PrismLibrary/Prism

@@ -9,7 +9,7 @@ using System.Security.Authentication;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace PoliCommon.WebApiClient
+namespace DotNetCommon.WebApiClient
 {
     public abstract class WebApiClientBase
     {

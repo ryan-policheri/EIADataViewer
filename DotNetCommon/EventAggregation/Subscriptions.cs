@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 
-namespace PoliCommon.EventAggregation
+namespace DotNetCommon.EventAggregation
 {
     [SuppressMessage("ReSharper", "ForCanBeConvertedToForeach")]
     internal class Subscriptions

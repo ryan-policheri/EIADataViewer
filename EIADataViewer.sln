@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIADataViewer", "EIADataViewer\EIADataViewer.csproj", "{B9E7422F-70EE-4F85-820C-77AC4ECA22A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoliCommon", "PoliCommon\PoliCommon.csproj", "{D312E9B0-5172-40FC-B719-68271557642F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCommon", "DotNetCommon\DotNetCommon.csproj", "{D312E9B0-5172-40FC-B719-68271557642F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIA.Domain", "EIA.Domain\EIA.Domain.csproj", "{BC8C41DE-81B0-4F30-A1E6-C9D1C75339BA}"
 EndProject

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using PoliCommon.DelegateCommand;
-using PoliCommon.EventAggregation;
-using PoliCommon.MVVM;
+using DotNetCommon.DelegateCommand;
+using DotNetCommon.EventAggregation;
+using DotNetCommon.MVVM;
 using EIA.Domain.Model;
 using EIA.Services.Clients;
 using EIADataViewer.Events;

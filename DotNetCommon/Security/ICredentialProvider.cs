@@ -1,4 +1,4 @@
-﻿namespace PoliCommon.Security
+﻿namespace DotNetCommon.Security
 {
     public interface ICredentialProvider
     {

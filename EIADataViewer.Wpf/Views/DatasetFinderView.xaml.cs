@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using MvvmCross.Platforms.Wpf.Views;
-using PoliCommon.MVVM;
+using DotNetCommon.MVVM;
 using EIADataViewer.Core.ViewModels;
 
 namespace EIADataViewer.Wpf.Views

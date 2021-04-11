@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PoliCommon.Security
+namespace DotNetCommon.Security
 {
     public class CredentialProvider : ICredentialProvider
     {

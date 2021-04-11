@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace PoliCommon.DelegateCommand
+namespace DotNetCommon.DelegateCommand
 {//Source: https://github.com/PrismLibrary/Prism
     /// <summary>
     /// Represents each node of nested properties expression and takes care of 

@@ -5,7 +5,7 @@ using EIA.Domain.Model;
 using EIA.Services.Clients;
 using EIADataViewer.Core.ModelWrappers;
 using MvvmCross.ViewModels;
-using PoliCommon.MVVM;
+using DotNetCommon.MVVM;
 
 namespace EIADataViewer.Core.ViewModels
 {

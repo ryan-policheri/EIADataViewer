@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-namespace PoliCommon.EventAggregation
+namespace DotNetCommon.EventAggregation
 {
     public sealed class MessageHub : IMessageHub
     {//Source: https://github.com/NimaAra/Easy.MessageHub
