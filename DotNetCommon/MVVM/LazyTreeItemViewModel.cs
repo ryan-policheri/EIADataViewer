@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace DotNetCommon.MVVM
 {
@@ -23,6 +24,19 @@ namespace DotNetCommon.MVVM
         public string Id => _model.GetId();
 
         public string Name => _model.GetItemName();
+
+        private bool _isExpanded;
+        public bool IsExpanded
+        { 
+            get { return _isExpanded; }
+            set
+            {
+                _isExpanded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsLeaf => _model.IsKnownLeaf() || Children.Count() == 0;
 
         public ObservableCollection<LazyTreeItemViewModel> Children { get; }
 

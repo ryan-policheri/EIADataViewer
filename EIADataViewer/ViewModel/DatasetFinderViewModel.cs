@@ -45,18 +45,29 @@ namespace EIADataViewer.ViewModel
 
         public async Task LoadChildrenAsync(LazyTreeItemViewModel treeItem)
         {
+            if (!treeItem.ChildrenLoaded)
+            {
+                ILazyTreeItemBackingModel modelInterface = treeItem.GetBackingModel();
+                CategorySeriesWrapper model = modelInterface as CategorySeriesWrapper;
+
+                if(model != null && model.IsCategory())
+                {
+                    Category itemToLoad = await _client.GetCategoryByIdAsync(int.Parse(treeItem.Id));
+                    CategorySeriesWrapper wrappedItem = new CategorySeriesWrapper(itemToLoad);
+                    treeItem.AppendLoadedChildren(wrappedItem.Children);
+                }
+            }
+        }
+
+        public async Task PeformLeafActionAsync(LazyTreeItemViewModel treeItem)
+        {
             ILazyTreeItemBackingModel modelInterface = treeItem.GetBackingModel();
             CategorySeriesWrapper model = modelInterface as CategorySeriesWrapper;
-            if(model != null && model.IsSeries())
+            if (model != null && model.IsSeries())
             {
                 _messageHub.Publish<ViewModelTransitionEvent>(new ViewModelTransitionEvent { SenderType = nameof(DatasetFinderViewModel), Id = model.GetId() });
                 return;
             }
-
-            if (treeItem.ChildrenLoaded) return; //Children are already loaded. Do nothing
-            Category itemToLoad = await _client.GetCategoryByIdAsync(int.Parse(treeItem.Id));
-            CategorySeriesWrapper wrappedItem = new CategorySeriesWrapper(itemToLoad);
-            treeItem.AppendLoadedChildren(wrappedItem.Children);
         }
     }
 }

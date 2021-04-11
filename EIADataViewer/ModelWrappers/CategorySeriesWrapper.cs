@@ -66,5 +66,10 @@ namespace EIADataViewer.ModelWrappers
         {
             return _series != null;
         }
+
+        public bool IsCategory()
+        {
+            return _category != null;
+        }
     }
 }

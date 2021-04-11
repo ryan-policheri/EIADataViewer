@@ -22,9 +22,16 @@ namespace EIADataViewer.View
                 if(treeItem != null)
                 {
                     LazyTreeItemViewModel treeItemViewModel = treeItem.DataContext as LazyTreeItemViewModel;
-                    if (treeItemViewModel != null)
+                    if (treeItemViewModel != null && !treeItemViewModel.IsExpanded && !treeItemViewModel.ChildrenLoaded)
                     {
                         await _viewModel.LoadChildrenAsync(treeItemViewModel);
+                        treeItemViewModel.IsExpanded = true;
+                        args.Handled = true;
+                    }
+                    else if (treeItemViewModel != null && treeItemViewModel.IsLeaf)
+                    {
+                        await _viewModel.PeformLeafActionAsync(treeItemViewModel);
+                        args.Handled = true;
                     }
                 }
             }
