@@ -55,7 +55,20 @@ namespace EIA.Domain.Model
             foreach (SeriesData dataPoint in _series.Data)
             {
                 DataRow row = table.NewRow();
-                row["PERIOD"] = DateTime.ParseExact(dataPoint.ColumnHeader,  "yyyyMM", us);
+                switch(_series.Frequency)
+                {
+                    case "M":
+                        row["PERIOD"] = DateTime.ParseExact(dataPoint.ColumnHeader, "yyyyMM", us);
+                        break;
+                    case "A":
+                        row["PERIOD"] = DateTime.ParseExact(dataPoint.ColumnHeader, "yyyy", us);
+                        break;
+                    case "Q":
+                        row["PERIOD"] = dataPoint.ColumnHeader.ParseQuarter();
+                        break;
+                    default:
+                        throw new NotImplementedException($"Fequency {_series.Frequency} is not implemented");
+                }    
                 row["VALUE"] = dataPoint.ColumnValue;
                 table.Rows.Add(row);
             }
