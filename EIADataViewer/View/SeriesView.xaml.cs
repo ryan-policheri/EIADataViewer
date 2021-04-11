@@ -28,7 +28,9 @@ namespace EIADataViewer.View
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            OnDataChanged();
         }
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -41,10 +43,13 @@ namespace EIADataViewer.View
 
         private void OnDataChanged()
         {
-            MainDataGrid.Visibility = Visibility.Visible;
-            CollectionViewSource collection = new CollectionViewSource();
-            collection.Source = ViewModel.DataSet;
-            MainDataGrid.ItemsSource = collection.View;
+            if (ViewModel?.DataSet != null)
+            {
+                MainDataGrid.Visibility = Visibility.Visible;
+                CollectionViewSource collection = new CollectionViewSource();
+                collection.Source = ViewModel.DataSet;
+                MainDataGrid.ItemsSource = collection.View;
+            }
         }
     }
 }

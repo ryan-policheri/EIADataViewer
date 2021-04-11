@@ -23,6 +23,20 @@ namespace EIADataViewer.ViewModel
             CloseSeriesCommand = new DelegateCommand(OnCloseSeries);
         }
 
+        private string _header;
+        public string Header 
+        {
+            get { return _header; }
+            set
+            {
+                _header = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string HeaderDetail => SeriesName;
+
+
         private string _seriesName;
         public string SeriesName
         {
@@ -31,6 +45,7 @@ namespace EIADataViewer.ViewModel
             {
                 _seriesName = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(HeaderDetail));
             }
         }
 
@@ -51,6 +66,7 @@ namespace EIADataViewer.ViewModel
         {
             Series series = await _client.GetSeriesByIdAsync(seriesId);
             SeriesName = series.Name;
+            Header = series.Id;
             ConstructedDataSet dataSet = series.ToConstructedDataSet();
             DataSet = dataSet.Table;
         }

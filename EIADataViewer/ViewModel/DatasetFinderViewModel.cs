@@ -22,6 +22,9 @@ namespace EIADataViewer.ViewModel
             _messageHub = messageHub;
         }
 
+        public string Header => "Dataset Finder";
+        public string HeaderDetail => "Navigate to a EIA dataset";
+
         private ObservableCollection<LazyTreeItemViewModel> _categories;
         public ObservableCollection<LazyTreeItemViewModel> Categories
         {

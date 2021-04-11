@@ -10,6 +10,7 @@ using EIA.Services.Clients;
 using EIADataViewer.Common;
 using EIADataViewer.ViewModel;
 using DotNetCommon.EventAggregation;
+using EIADataViewer.ViewModel.Base;
 
 namespace EIADataViewer
 {
@@ -47,6 +48,8 @@ namespace EIADataViewer
         private IServiceProvider BuildServiceProvider()
         {
             ICredentialProvider credProvider = new CredentialProvider("Personal_IV", "Personal_Key");
+
+
             ServiceCollection services = new ServiceCollection();
 
             services.AddTransient<ICredentialProvider, CredentialProvider>(x => new CredentialProvider("Personal_IV", "Personal_Key"));
@@ -60,6 +63,9 @@ namespace EIADataViewer
             services.AddTransient<EiaClient>(x => new EiaClient(x.GetRequiredService<IHttpClientFactory>().CreateClient("EiaClient")));
 
             services.AddSingleton<IMessageHub, MessageHub>();
+
+            services.AddTransient<RobustViewModelDependencies>();
+            services.AddTransient<RobustViewModelBase>();
 
             services.AddTransient<MainViewModel>();
             services.AddTransient<DatasetFinderViewModel>();

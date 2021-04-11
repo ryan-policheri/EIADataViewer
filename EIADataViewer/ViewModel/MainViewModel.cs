@@ -1,21 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using DotNetCommon.EventAggregation;
 using DotNetCommon.MVVM;
 using EIADataViewer.Events;
+using EIADataViewer.ViewModel.Base;
 
 namespace EIADataViewer.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : RobustViewModelBase
     {
         private readonly DatasetFinderViewModel _datasetFinderViewModel;
         private readonly SeriesViewModel _seriesViewModel;
         private readonly IMessageHub _messageHub;
 
-        public MainViewModel(DatasetFinderViewModel datasetFinderViewModel, SeriesViewModel seriesViewModel, IMessageHub messageHub)
+        public MainViewModel(DatasetFinderViewModel datasetFinderViewModel, SeriesViewModel seriesViewModel, IMessageHub messageHub, RobustViewModelDependencies facade) : base(facade)
         {
             _datasetFinderViewModel = datasetFinderViewModel;
             _seriesViewModel = seriesViewModel;
             CurrentChild = datasetFinderViewModel;
+            Children = new ObservableCollection<ViewModelBase>();
+
             _messageHub = messageHub;
             _messageHub.Subscribe<ViewModelTransitionEvent>(OnViewModelTransition);
         }
@@ -24,15 +28,18 @@ namespace EIADataViewer.ViewModel
         public ViewModelBase CurrentChild 
         {
             get { return _currentChild; }
-            private set
+            set
             {
                 _currentChild = value;
                 OnPropertyChanged();
             }
         }
 
+        public ObservableCollection<ViewModelBase> Children { get; }
+
         public async Task LoadAsync()
         {
+            Children.Add(_datasetFinderViewModel);
             CurrentChild = _datasetFinderViewModel;
             await _datasetFinderViewModel.LoadAsync();
         }
@@ -41,8 +48,10 @@ namespace EIADataViewer.ViewModel
         {
             if (args.SenderType == nameof(DatasetFinderViewModel))
             {
-                CurrentChild = _seriesViewModel;
-                await _seriesViewModel.LoadAsync(args.Id);
+                SeriesViewModel vm = this.Resolve<SeriesViewModel>();
+                Children.Add(vm);
+                CurrentChild = vm;
+                await vm.LoadAsync(args.Id);
             }    
             else if (args.SenderType == nameof(SeriesViewModel))
             {
