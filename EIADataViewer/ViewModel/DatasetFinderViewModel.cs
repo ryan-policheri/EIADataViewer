@@ -65,7 +65,7 @@ namespace EIADataViewer.ViewModel
             CategorySeriesWrapper model = modelInterface as CategorySeriesWrapper;
             if (model != null && model.IsSeries())
             {
-                _messageHub.Publish<ViewModelTransitionEvent>(new ViewModelTransitionEvent { SenderType = nameof(DatasetFinderViewModel), Id = model.GetId() });
+                _messageHub.Publish<OpenViewModelEvent>(new OpenViewModelEvent { Sender = this, SenderTypeName = nameof(DatasetFinderViewModel), Id = model.GetId() });
                 return;
             }
         }

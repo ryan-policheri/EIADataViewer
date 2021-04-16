@@ -73,7 +73,7 @@ namespace EIADataViewer.ViewModel
 
         private void OnCloseSeries()
         {
-            _messageHub.Publish<ViewModelTransitionEvent>(new ViewModelTransitionEvent { SenderType = nameof(SeriesViewModel), ActionInfo = "Close" });
+            _messageHub.Publish<CloseViewModelEvent>(new CloseViewModelEvent { Sender = this, SenderTypeName = nameof(SeriesViewModel) });
         }
     }
 }

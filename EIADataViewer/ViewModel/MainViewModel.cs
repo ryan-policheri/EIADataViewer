@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using DotNetCommon.EventAggregation;
 using DotNetCommon.MVVM;
@@ -21,7 +22,8 @@ namespace EIADataViewer.ViewModel
             Children = new ObservableCollection<ViewModelBase>();
 
             _messageHub = messageHub;
-            _messageHub.Subscribe<ViewModelTransitionEvent>(OnViewModelTransition);
+            _messageHub.Subscribe<OpenViewModelEvent>(OnOpenViewModel);
+            _messageHub.Subscribe<CloseViewModelEvent>(OnCloseViewModel);
         }
 
         private ViewModelBase _currentChild;
@@ -56,6 +58,26 @@ namespace EIADataViewer.ViewModel
             else if (args.SenderType == nameof(SeriesViewModel))
             {
                 CurrentChild = _datasetFinderViewModel;
+            }
+        }
+
+        private void OnCloseViewModel(CloseViewModelEvent args)
+        {
+            if (args.SenderTypeName == nameof(SeriesViewModel))
+            {
+                CurrentChild = _datasetFinderViewModel;
+                this.Children.Remove(args.Sender as ViewModelBase);
+            }
+        }
+
+        private async void OnOpenViewModel(OpenViewModelEvent args)
+        {
+            if (args.SenderTypeName == nameof(DatasetFinderViewModel))
+            {
+                SeriesViewModel vm = this.Resolve<SeriesViewModel>();
+                Children.Add(vm);
+                CurrentChild = vm;
+                await vm.LoadAsync(args.Id);
             }
         }
     }
