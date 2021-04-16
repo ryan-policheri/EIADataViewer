@@ -36,6 +36,7 @@ namespace EIADataViewer.ViewModel
 
         public string HeaderDetail => SeriesName;
 
+        public bool IsCloseable => true;
 
         private string _seriesName;
         public string SeriesName

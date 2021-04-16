@@ -24,6 +24,7 @@ namespace EIADataViewer.ViewModel
 
         public string Header => "Dataset Finder";
         public string HeaderDetail => "Navigate to a EIA dataset";
+        public bool IsCloseable => false;
 
         private ObservableCollection<LazyTreeItemViewModel> _categories;
         public ObservableCollection<LazyTreeItemViewModel> Categories
