@@ -1,9 +1,5 @@
-﻿using DotNetCommon.MVVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DotNetCommon.EventAggregation;
+using DotNetCommon.MVVM;
 
 namespace EIADataViewer.ViewModel.Base
 {
@@ -15,6 +11,8 @@ namespace EIADataViewer.ViewModel.Base
         {
             _facade = facade;
         }
+
+        protected IMessageHub MessageHub => _facade.MessageHub;
 
         protected T Resolve<T>()
         {

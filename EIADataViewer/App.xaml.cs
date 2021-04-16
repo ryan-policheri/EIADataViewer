@@ -6,10 +6,10 @@ using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetCommon.Security;
+using DotNetCommon.EventAggregation;
 using EIA.Services.Clients;
 using EIADataViewer.Common;
 using EIADataViewer.ViewModel;
-using DotNetCommon.EventAggregation;
 using EIADataViewer.ViewModel.Base;
 
 namespace EIADataViewer
@@ -68,6 +68,7 @@ namespace EIADataViewer
             services.AddTransient<RobustViewModelBase>();
 
             services.AddTransient<MainViewModel>();
+            services.AddTransient<DataExplorerViewModel>();
             services.AddTransient<DatasetFinderViewModel>();
             services.AddTransient<SeriesViewModel>();
 
