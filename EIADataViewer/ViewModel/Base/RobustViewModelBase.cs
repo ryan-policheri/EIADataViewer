@@ -1,5 +1,6 @@
 ﻿using DotNetCommon.EventAggregation;
 using DotNetCommon.MVVM;
+using Microsoft.Extensions.Logging;
 
 namespace EIADataViewer.ViewModel.Base
 {
@@ -13,6 +14,8 @@ namespace EIADataViewer.ViewModel.Base
         }
 
         protected IMessageHub MessageHub => _facade.MessageHub;
+
+        protected ILogger Logger => _facade.Logger;
 
         protected T Resolve<T>()
         {

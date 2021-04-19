@@ -11,6 +11,8 @@ using EIA.Services.Clients;
 using EIADataViewer.Common;
 using EIADataViewer.ViewModel;
 using EIADataViewer.ViewModel.Base;
+using DotNetCommon.Logging.File;
+using Microsoft.Extensions.Logging;
 
 namespace EIADataViewer
 {
@@ -52,6 +54,16 @@ namespace EIADataViewer
 
             ServiceCollection services = new ServiceCollection();
 
+            string fileDirPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            FileLoggerConfig config = new FileLoggerConfig(fileDirPath, fileDirPath.Trim('\\') + "EIADataViewerLog.log");
+            FileLoggerProvider fileLoggerProvider = new FileLoggerProvider(config);
+
+            services.AddLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.AddProvider(fileLoggerProvider);
+            });
+
             services.AddTransient<ICredentialProvider, CredentialProvider>(x => new CredentialProvider("Personal_IV", "Personal_Key"));
             services.AddHttpClient("EiaClient", c =>
             {
@@ -64,7 +76,7 @@ namespace EIADataViewer
 
             services.AddSingleton<IMessageHub, MessageHub>();
 
-            services.AddTransient<RobustViewModelDependencies>();
+            services.AddTransient<RobustViewModelDependencies>(x => new RobustViewModelDependencies(x.GetRequiredService<IServiceProvider>(), x.GetRequiredService<IMessageHub>(), x.GetRequiredService<ILogger<RobustViewModelDependencies>>()));
             services.AddTransient<RobustViewModelBase>();
 
             services.AddTransient<MainViewModel>();

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DotNetCommon.MVVM;
 using EIADataViewer.Events;
 using EIADataViewer.ViewModel.Base;
+using Microsoft.Extensions.Logging;
 
 namespace EIADataViewer.ViewModel
 {
@@ -54,6 +55,7 @@ namespace EIADataViewer.ViewModel
             if (args.SenderTypeName == nameof(DatasetFinderViewModel))
             {
                 SeriesViewModel vm = this.Resolve<SeriesViewModel>();
+                Logger.LogInformation($"Loading series {args.Id}");
                 Children.Add(vm);
                 CurrentChild = vm;
                 await vm.LoadAsync(args.Id);
