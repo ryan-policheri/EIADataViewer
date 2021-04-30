@@ -4,14 +4,16 @@ namespace DotNetCommon.Logging.File
 {
     public class FileLoggerConfig
     {
-        public FileLoggerConfig(string logFileDirectory, string logFileFullPath)
+
+        public FileLoggerConfig(string logFileDirectory, string logFileName)
         {
-            LogFileDirectory = logFileDirectory;
-            LogFileFullPath = logFileFullPath;
+            LogFileDirectory = logFileDirectory.TrimEnd('\\');
+            LogFileName = logFileName;
         }
 
         public string LogFileDirectory { get; }
-        public string LogFileFullPath { get; }
+        public string LogFileName { get; }
+        public string LogFileFullPath => LogFileDirectory + "\\" + LogFileName;
 
         public bool CanLog(LogLevel logLevel)
         {

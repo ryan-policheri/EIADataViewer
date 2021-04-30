@@ -37,6 +37,14 @@ namespace DotNetCommon.Logging.File
                 if (stateAsDictionary != null && stateAsDictionary.ContainsKey("{OriginalFormat}")) message = stateAsDictionary["{OriginalFormat}"].ToString();
                 else message = String.Empty;
 
+                if(!String.IsNullOrWhiteSpace(message))
+                {
+                    foreach(var item in stateAsDictionary)
+                    {
+                        message = message.Replace(item.Key, item.Value.ToString());
+                    }
+                }
+
                 QueueEntry(logLevel, eventId, message, exception);
                 if (EnsureDirectory())
                 {
@@ -55,9 +63,9 @@ namespace DotNetCommon.Logging.File
         {
             StringBuilder builder = new StringBuilder();
             builder.Append($"Time: {DateTime.Now} Category: {logLevel.ToString()} Message: {message}");
-            if (eventId != null && !String.IsNullOrWhiteSpace(eventId.Name)) builder.Append($"Event: {eventId.Name}");
+            if (eventId != null && !String.IsNullOrWhiteSpace(eventId.Name)) builder.Append($" Event: {eventId.Name}");
 
-                bool loggedMoreText = false;
+            bool loggedMoreText = false;
             if (exception != null)
             {
                 loggedMoreText = true;
@@ -95,7 +103,7 @@ namespace DotNetCommon.Logging.File
 
             try
             {
-                using (StreamWriter writer = new StreamWriter(_config.LogFileFullPath))
+                using (StreamWriter writer = new StreamWriter(_config.LogFileFullPath, true))
                 {
                     while (_logQueue.Count > 0)
                     {

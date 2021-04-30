@@ -5,7 +5,6 @@ namespace DotNetCommon.Logging.File
     public class FileLoggerProvider : ILoggerProvider
     {
         private readonly FileLoggerConfig _config;
-
         private FileLogger _logger;
 
         public FileLoggerProvider(FileLoggerConfig config)
