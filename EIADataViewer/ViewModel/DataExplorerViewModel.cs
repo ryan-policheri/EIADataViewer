@@ -1,9 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using DotNetCommon.MVVM;
+using DotNetCommon.FileSystem;
+using EIADataViewer.Constants;
 using EIADataViewer.Events;
 using EIADataViewer.ViewModel.Base;
-using Microsoft.Extensions.Logging;
+using System;
 
 namespace EIADataViewer.ViewModel
 {
@@ -19,6 +23,7 @@ namespace EIADataViewer.ViewModel
 
             MessageHub.Subscribe<OpenViewModelEvent>(OnOpenViewModel);
             MessageHub.Subscribe<CloseViewModelEvent>(OnCloseViewModel);
+            MessageHub.Subscribe<MenuItemEvent>(OnMenuItemEvent);
         }
 
         private ViewModelBase _currentChild;
@@ -59,6 +64,33 @@ namespace EIADataViewer.ViewModel
                 Children.Add(vm);
                 CurrentChild = vm;
                 await vm.LoadAsync(args.Id);
+            }
+        }
+
+        private async void OnMenuItemEvent(MenuItemEvent args)
+        {
+            if(args.MenuItemHeader == MenuItemHeaders.SAVE_OPEN_SERIES)
+            {
+                ICollection<string> ids = new List<string>();
+
+                foreach (ViewModelBase child in this.Children)
+                {
+                    if (child.GetType() == typeof(SeriesViewModel))
+                    {
+                        SeriesViewModel vm = child as SeriesViewModel;
+                        ids.Add(vm.SeriesId);
+                    }
+                }
+
+                AppDataFile file = new AppDataFile(ids);
+                try
+                {
+                    await FileSystem.SaveObjectAsFile(file);
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
             }
         }
     }

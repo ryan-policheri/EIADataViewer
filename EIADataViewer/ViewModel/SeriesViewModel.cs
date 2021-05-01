@@ -50,6 +50,8 @@ namespace EIADataViewer.ViewModel
             }
         }
 
+        public string SeriesId { get; private set; }
+
         private DataTable _dataSet;
         public DataTable DataSet 
         {
@@ -67,6 +69,7 @@ namespace EIADataViewer.ViewModel
         {
             Series series = await _client.GetSeriesByIdAsync(seriesId);
             SeriesName = series.Name;
+            SeriesId = series.Id;
             Header = series.Id;
             ConstructedDataSet dataSet = series.ToConstructedDataSet();
             DataSet = dataSet.Table;

@@ -1,10 +1,8 @@
-﻿using EIADataViewer.ViewModel.Base;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using DotNetCommon.DelegateCommand;
+using EIADataViewer.Constants;
+using EIADataViewer.Events;
+using EIADataViewer.ViewModel.Base;
 
 namespace EIADataViewer.ViewModel.MainMenu
 {
@@ -20,13 +18,20 @@ namespace EIADataViewer.ViewModel.MainMenu
 
         private void BuildMenuItems()
         {
-            MenuItemViewModel file = new MenuItemViewModel("File", null);
-            file.Children.Add(new MenuItemViewModel("Foo", file));
-            MenuItemViewModel edit = new MenuItemViewModel("Edit", null);
-            MenuItemViewModel settings = new MenuItemViewModel("Settings", null);
+            MenuItemViewModel file = new MenuItemViewModel("File", null, null);
+            MenuItemViewModel saveOpenSeries = new MenuItemViewModel(MenuItemHeaders.SAVE_OPEN_SERIES, new DelegateCommand(SaveOpenSeries), file);
+            file.Children.Add(saveOpenSeries);
+
+            MenuItemViewModel edit = new MenuItemViewModel("Edit", null, null);
+            MenuItemViewModel settings = new MenuItemViewModel("Settings", null, null);
             MenuItems.Add(file);
             MenuItems.Add(edit);
             MenuItems.Add(settings);
+        }
+
+        private void SaveOpenSeries()
+        {
+            MessageHub.Publish<MenuItemEvent>(new MenuItemEvent { Sender = this, SenderTypeName = nameof(MainMenuViewModel), MenuItemHeader = MenuItemHeaders.SAVE_OPEN_SERIES });
         }
     }
 }

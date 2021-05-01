@@ -22,7 +22,7 @@
                     <Setter Property="Command" Value="{Binding Command}"/>
                 </Style>
                 <HierarchicalDataTemplate DataType="{x:Type vm:MenuItemViewModel}" ItemsSource="{Binding Children}">
-                    <MenuItem Header="{Binding Header}" Command="{Binding Command}"/>
+                    <MenuItem Header="{Binding Header}" Command="{Binding Command}" />
                 </HierarchicalDataTemplate>
             </Menu.Resources>
         </Menu>
