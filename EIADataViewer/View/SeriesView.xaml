@@ -44,7 +44,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0">
-            <TextBlock Text="{Binding SeriesName}" FontSize="18" Margin="10" FontWeight="Bold"/>
+            <TextBlock Text="{Binding SeriesName}" Margin="10" FontWeight="Bold"/>
             <Button Content="Close Series" Command="{Binding CloseSeriesCommand}" Width="250" Height="50"/>
         </StackPanel>
 

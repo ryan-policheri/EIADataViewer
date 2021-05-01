@@ -6,15 +6,18 @@
         xmlns:local="clr-namespace:EIADataViewer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="EIA Data Viewer" Height="450" Width="800">
+        Title="EIA Data Viewer" Height="450" Width="800" FontSize="16"
+        WindowStyle="ThreeDBorderWindow">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding CurrentChild}"/>
+
+        <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding MainToolBar}"/>
+        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding CurrentChild}"/>
     </Grid>
 </Window>

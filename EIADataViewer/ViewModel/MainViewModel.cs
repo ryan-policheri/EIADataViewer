@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DotNetCommon.MVVM;
 using EIADataViewer.ViewModel.Base;
+using EIADataViewer.ViewModel.MainMenu;
 
 namespace EIADataViewer.ViewModel
 {
@@ -9,10 +9,13 @@ namespace EIADataViewer.ViewModel
     {
         private readonly DataExplorerViewModel _dataExplorer;
 
-        public MainViewModel(DataExplorerViewModel dataExplorer, RobustViewModelDependencies facade) : base(facade)
+        public MainViewModel(DataExplorerViewModel dataExplorer, MainMenuViewModel toolBar, RobustViewModelDependencies facade) : base(facade)
         {
+            MainToolBar = toolBar;
             _dataExplorer = dataExplorer;
         }
+
+        public MainMenuViewModel MainToolBar { get; }
 
         private ViewModelBase _currentChild;
         public ViewModelBase CurrentChild 

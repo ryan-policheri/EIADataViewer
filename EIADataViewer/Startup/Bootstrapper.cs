@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,7 @@ using DotNetCommon.Logging.File;
 using EIA.Services.Clients;
 using EIADataViewer.ViewModel;
 using EIADataViewer.ViewModel.Base;
-using System.IO;
+using EIADataViewer.ViewModel.MainMenu;
 
 namespace EIADataViewer.Startup
 {
@@ -58,6 +59,7 @@ namespace EIADataViewer.Startup
             services.AddTransient<RobustViewModelBase>();
 
             services.AddTransient<MainViewModel>();
+            services.AddTransient<MainMenuViewModel>();
             services.AddTransient<DataExplorerViewModel>();
             services.AddTransient<DatasetFinderViewModel>();
             services.AddTransient<SeriesViewModel>();
