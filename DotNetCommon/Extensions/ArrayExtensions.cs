@@ -11,6 +11,12 @@ namespace DotNetCommon.Extensions
             do action(array, walker.Position);
             while (walker.Step());
         }
+
+        public static int LastIndex<T>(this T[] array)
+        {
+            if (array == null) return -1;
+            return array.Length - 1;
+        }
     }
 
     internal class ArrayTraverse

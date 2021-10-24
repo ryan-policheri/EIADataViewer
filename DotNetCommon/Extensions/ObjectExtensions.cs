@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
+using DotNetCommon.Constants;
 
 namespace DotNetCommon.Extensions
 {
@@ -80,6 +82,57 @@ namespace DotNetCommon.Extensions
                 if (obj == null) return 0;
                 return obj.GetHashCode();
             }
+        }
+
+        public static string ToArgumentString<T>(this object source)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (PropertyInfo prop in typeof(T).GetProperties())
+            {
+                string propName = prop.Name;
+                string propValue = prop.GetValue(source)?.ToString();
+                if (propValue != null)
+                {
+                    builder.Append(ParameterStyle.DoubleDash.ToDescription()).Append(propName).Append(" \"").Append(propValue).Append("\" ");
+                }
+            }
+            return builder.ToString();
+        }
+
+        public static void SetValueWithTypeRespect(this PropertyInfo property, object instance, string rawValue)
+        {
+            Type propertyType = property.PropertyType;
+
+            if (propertyType == typeof(string)) property.SetValue(instance, rawValue);
+            else if (propertyType == typeof(bool))
+            {
+                if (bool.TryParse(rawValue, out bool result)) property.SetValue(instance, result);
+                else property.SetValue(instance, default(bool));
+            }
+            else if (propertyType == typeof(int))
+            {
+                if (int.TryParse(rawValue, out int result)) property.SetValue(instance, result);
+                else property.SetValue(instance, default(int));
+            }
+            else if (propertyType == typeof(decimal))
+            {
+                if (decimal.TryParse(rawValue, out decimal result)) property.SetValue(instance, result);
+                else property.SetValue(instance, default(decimal));
+            }
+            else if (propertyType == typeof(DateTime))
+            {
+                if (DateTime.TryParse(rawValue, out DateTime result)) property.SetValue(instance, result);
+                else property.SetValue(instance, default(DateTime));
+            }
+            else if (propertyType.IsEnum)
+            {
+                if (!String.IsNullOrWhiteSpace(rawValue))
+                {
+                    Type enumType = propertyType.UnderlyingSystemType;
+                    property.SetValue(instance, Enum.Parse(enumType, rawValue, true));
+                }
+            }
+            else throw new NotImplementedException("Parsing for type " + propertyType.Name + " is not implemented.");
         }
     }
 }
